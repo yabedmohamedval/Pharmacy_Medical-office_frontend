@@ -1,0 +1,45 @@
+
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">List of Pharmacies</h2>
+
+    <!-- Formulaire de recherche -->
+    <form class="mb-4">
+      <div class="input-group">
+        <select class="form-control" [(ngModel)]="selectedCriteria" name="criteria" title="Sélectionnez un critère de recherche">
+          <option value="moughataa">Moughataa</option>
+          <option value="commune">Commune</option>
+          <option value="open_time">Horaires d'ouverture</option>
+          <!-- Options de critères de recherche -->
+        </select>
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchTerm" name="search" (input)="onSearchChange()">
+        <div class="input-group-append">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Liste des pharmacies -->
+    <table class="table table-bordered table-hover">
+      <thead class="bg-primary text-white">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pharmacy of pharmacies">
+          <td>{{ pharmacy.id }}</td>
+          <td>{{ pharmacy.name }}</td>
+          <td>
+            <a [routerLink]="['/pharmacies', pharmacy.id]" class="btn btn-primary me-2"><img src="assets/images/view.png" alt="view"></a>
+            <button (click)="deletePharmacy(pharmacy.id)" class="btn btn-danger" *ngIf="!isVisitor()">
+              <img src="assets/images/delete.png" alt="delete">
+            </button>
+            
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

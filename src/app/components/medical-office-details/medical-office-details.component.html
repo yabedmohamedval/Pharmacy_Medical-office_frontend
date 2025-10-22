@@ -1,0 +1,14 @@
+<div class="container">
+  <h2 class="mt-4 mb-3">Détails du Cabinet Médical</h2>
+  <div *ngIf="medicalOffice" class="card">
+    <div class="card-body">
+      <h3 class="card-title">{{ medicalOffice.name }}</h3>
+      <p class="card-text">{{ medicalOffice.address }}</p>
+      <p class="card-text">Moughataa: {{ medicalOffice.wilaya }}</p>
+      <p class="card-text">Moughataa: {{ medicalOffice.moughataa }}</p>
+      <p class="card-text">Commune: {{ medicalOffice.commune }}</p>
+      <p class="card-text">Spécialité: {{ medicalOffice.speciality }}</p>
+      <p class="card-text">open_time: {{ medicalOffice.open_time }}</p>
+    </div>
+  </div>
+</div>

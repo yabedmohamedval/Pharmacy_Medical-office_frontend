@@ -1,0 +1,47 @@
+# --- OS / éditeurs ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# --- Node / Angular ---
+node_modules/
+dist/
+dist-ssr/
+out-tsc/
+.tmp/
+tmp/
+coverage/
+.npm/
+.pnp.*
+.pnpm-debug.log*
+yarn-error.log*
+package-lock.json # <-- ⚠️ En général, NE PAS ignorer le lockfile ! (voir note plus bas)
+
+# --- Angular cache ---
+.angular/cache/
+.angular/
+
+# --- ESLint / outils ---
+.eslintcache
+.nyc_output/
+*.tsbuildinfo
+
+# --- Tests (Cypress / Playwright / Jest) ---
+cypress/videos/
+cypress/screenshots/
+playwright-report/
+test-results/
+jest-html-reporters-*.html
+
+# --- Environnements / secrets ---
+.env
+.env.*
+*.local.env
+# Si tu utilises des fichiers d'env custom :
+# src/environments/environment.local.ts
+
+# --- IDEs ---
+.vscode/
+.idea/
+*.iml

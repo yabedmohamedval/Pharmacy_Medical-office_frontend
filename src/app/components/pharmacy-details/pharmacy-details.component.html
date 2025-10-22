@@ -1,0 +1,13 @@
+
+<div class="container">
+    <h2 class="mt-4 mb-3">Détails de la Pharmacie</h2>
+    <div *ngIf="pharmacy" class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{ pharmacy.name }}</h3>
+        <p class="card-text">{{ pharmacy.addressRaw }}</p>
+        <p class="card-text">Moughataa: {{ pharmacy.moughataa }}</p>
+        <p class="card-text">Commune: {{ pharmacy.commune }}</p>
+        <p class="card-text">open_time: {{ pharmacy.open_time }}</p>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,17 @@
+.navbar {
+    margin-bottom: 20px;
+  }
+  
+  .navbar-brand {
+    font-weight: bold;
+  }
+  
+  .form-inline {
+    display: flex;
+    align-items: center;
+  }
+  
+  .btn-outline-danger {
+    margin-left: 10px;
+  }
+  

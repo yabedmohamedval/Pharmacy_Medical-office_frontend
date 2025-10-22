@@ -1,0 +1,76 @@
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Create Pharmacy</h2>
+    <form [formGroup]="pharmacyForm" (ngSubmit)="onSubmit()">
+      <div class="form-group mb-3">
+        <label for="name">Name</label>
+        <input type="text" id="name" formControlName="name" class="form-control" placeholder="Enter the name" />
+        <div *ngIf="pharmacyForm.get('name')?.invalid && pharmacyForm.get('name')?.touched" class="text-danger">
+          Name is required.
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="addressRaw">Address</label>
+        <div class="d-flex gap-2">
+          <input id="addressRaw" formControlName="addressRaw" class="form-control" placeholder="Enter the address" />
+          <button type="button" class="btn btn-outline-secondary" (click)="locateByText()">🔎</button>
+        </div>
+        <small class="text-muted">Tape une adresse OU choisis sur la carte.</small>
+        <div *ngIf="pharmacyForm.get('addressRaw')?.invalid && pharmacyForm.get('addressRaw')?.touched" class="text-danger">
+          Address is required.
+        </div>
+      </div>
+
+      <!-- Carte -->
+      <div class="form-group mb-3">
+        <label>Pick on map</label>
+        <div id="map" class="border rounded"></div>
+        <small class="text-muted">Clique sur la carte pour placer le marqueur, ou glisse-le.</small>
+      </div>
+
+      <!-- Coords (readonly) -->
+      <div class="row g-3 mb-3">
+        <div class="col">
+          <label>Latitude</label>
+          <input class="form-control" formControlName="latitude" readonly />
+        </div>
+        <div class="col">
+          <label>Longitude</label>
+          <input class="form-control" formControlName="longitude" readonly />
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="moughataa">Moughataa</label>
+        <input type="text" id="moughataa" formControlName="moughataa" class="form-control" placeholder="Enter the moughataa" />
+        <div *ngIf="pharmacyForm.get('moughataa')?.invalid && pharmacyForm.get('moughataa')?.touched" class="text-danger">
+          Moughataa is required.
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="commune">Commune</label>
+        <input type="text" id="commune" formControlName="commune" class="form-control" placeholder="Enter the commune" />
+        <div *ngIf="pharmacyForm.get('commune')?.invalid && pharmacyForm.get('commune')?.touched" class="text-danger">
+          Commune is required.
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="open_time">Open Time</label>
+        <select id="open_time" formControlName="open_time" class="form-select">
+          <option value="24/24">24/24</option>
+          <option value="16/24">16/24</option>
+          <option value="12/24">12/24</option>
+          <option value="10/24">10/24</option>
+          <option value="8/24">8/24</option>
+        </select>
+        <div *ngIf="pharmacyForm.get('open_time')?.invalid && pharmacyForm.get('open_time')?.touched" class="text-danger">
+          Open Time is required.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="pharmacyForm.invalid">Create</button>
+    </form>
+  </div>

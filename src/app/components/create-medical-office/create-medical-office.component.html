@@ -1,0 +1,66 @@
+<!-- create-medical-office.component.html -->
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Create Medical Office</h2>
+  <form [formGroup]="medicalOfficeForm" (ngSubmit)="onSubmit()">
+    <div class="form-group mb-3">
+      <label for="name">Name</label>
+      <input type="text" id="name" formControlName="name" class="form-control" placeholder="Enter the name" />
+      <div *ngIf="medicalOfficeForm.get('name')?.invalid && medicalOfficeForm.get('name')?.touched" class="text-danger">
+        Name is required.
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="address">Address</label>
+      <input type="text" id="address" formControlName="address" class="form-control" placeholder="Enter the address" />
+      <div *ngIf="medicalOfficeForm.get('address')?.invalid && medicalOfficeForm.get('address')?.touched" class="text-danger">
+        Address is required.
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="wilaya">Wilaya</label>
+      <input type="text" id="wilaya" formControlName="wilaya" class="form-control" placeholder="Enter the wilaya" />
+      <div *ngIf="medicalOfficeForm.get('wilaya')?.invalid && medicalOfficeForm.get('wilaya')?.touched" class="text-danger">
+        Wilaya is required.
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="moughataa">Moughataa</label>
+      <input type="text" id="moughataa" formControlName="moughataa" class="form-control" placeholder="Enter the moughataa" />
+      <div *ngIf="medicalOfficeForm.get('moughataa')?.invalid && medicalOfficeForm.get('moughataa')?.touched" class="text-danger">
+        Moughataa is required.
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="commune">Commune</label>
+      <input type="text" id="commune" formControlName="commune" class="form-control" placeholder="Enter the commune" />
+      <div *ngIf="medicalOfficeForm.get('commune')?.invalid && medicalOfficeForm.get('commune')?.touched" class="text-danger">
+        Commune is required.
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="speciality">Speciality</label>
+      <input type="text" id="speciality" formControlName="speciality" class="form-control" placeholder="Enter the speciality (default: generale)" />
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="open_time">Open Time</label>
+      <select id="open_time" formControlName="open_time" class="form-select">
+        <option value="24/24">24/24</option>
+        <option value="16/24">16/24</option>
+        <option value="12/24">12/24</option>
+        <option value="10/24">10/24</option>
+        <option value="8/24">8/24</option>
+      </select>
+      <div *ngIf="medicalOfficeForm.get('open_time')?.invalid && medicalOfficeForm.get('open_time')?.touched" class="text-danger">
+        Open Time is required.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="medicalOfficeForm.invalid">Create</button>
+  </form>
+</div>
