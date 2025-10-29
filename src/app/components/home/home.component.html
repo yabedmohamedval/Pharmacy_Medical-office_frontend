@@ -1,37 +1,115 @@
-<!-- home.component.html -->
-<div class="container home-container mt-5">
-  <h1 class="text-center mb-5">Welcome to Pharmacie&Medical_office App!</h1>
-
-  <!-- Section 1: Pharmacies -->
-  <div class="row mb-5">
-    <div class="col-md-6">
-      <img src="assets/images/pharmacy.jpeg" alt="Pharmacy" class="img-fluid">
-    </div>
-    <div class="col-md-6 d-flex align-items-center">
-      <div>
-        <h2>About Our Pharmacies</h2>
-        <p>
-          Grâce à notre application, trouvez facilement les pharmacies
-          les plus proches de vous partout en Mauritanie, et accédez
-          rapidement aux médicaments et aux produits de santé nécessaires.
+<section class="hero-section">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold mb-3">
+          Trouvez <span class="text-primary">rapidement</span> pharmacies & cabinets
+        </h1>
+        <p class="lead text-muted mb-4">
+          Un guichet unique pour localiser, filtrer et contacter les établissements de santé autour de vous,
+          partout en Mauritanie.
         </p>
+
+        <div class="d-flex gap-3 flex-wrap">
+          <a routerLink="/pharmacies" class="btn btn-primary btn-lg px-4">
+            <i class="bi bi-capsule me-2"></i> Voir les pharmacies
+          </a>
+          <a routerLink="/medical-offices" class="btn btn-outline-secondary btn-lg px-4">
+            <i class="bi bi-hospital me-2"></i> Voir les cabinets
+          </a>
+        </div>
+
+        <!-- quick search -->
+        <div class="quick-search mt-4">
+          <div class="input-group input-group-lg">
+            <span class="input-group-text bg-white"><i class="bi bi-geo-alt"></i></span>
+            <input type="text" class="form-control" placeholder="Chercher par wilaya, moughataa, commune…">
+            <button class="btn btn-primary"><i class="bi bi-search"></i></button>
+          </div>
+          <small class="text-muted d-block mt-2">Astuce : essaye “Tevragh-Zeina” ou “Nouakchott Ouest”.</small>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="hero-visual shadow-sm rounded-4 overflow-hidden">
+          <img src="assets/images/pharmacy.jpeg" class="img-fluid" alt="Pharmacy">
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Section 2: Medical Offices -->
-  <div class="row mb-5">
-    <div class="col-md-6">
-      <img src="assets/images/medical_office.jpeg" alt="Medical Office" class="img-fluid">
+<!-- Features -->
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-4">
+      <h2 class="fw-semibold">Ce que vous pouvez faire</h2>
+      <p class="text-muted">Des outils pensés pour aller à l’essentiel.</p>
     </div>
-    <div class="col-md-6 d-flex align-items-center">
-      <div>
-        <h2>About Our Medical Offices</h2>
-        <p>
-          Notre application vous offre la localisation des cabinets médicaux à travers
-          la Mauritanie, pour un accès rapide aux soins et services médicaux essentiels.
-        </p>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="feature-card h-100 p-4 rounded-4 shadow-sm">
+          <div class="icon-wrap text-primary mb-3"><i class="bi bi-map fs-1"></i></div>
+          <h5>Localisation précise</h5>
+          <p class="text-muted">Cartes interactives (OSM) avec géocodage et reverse géocodage intégrés.</p>
+          <a routerLink="/pharmacies" class="stretched-link">Explorer</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card h-100 p-4 rounded-4 shadow-sm">
+          <div class="icon-wrap text-primary mb-3"><i class="bi bi-funnel fs-1"></i></div>
+          <h5>Filtres intelligents</h5>
+          <p class="text-muted">Filtre par wilaya, moughataa, commune, horaires, spécialité…</p>
+          <a routerLink="/pharmacies" class="stretched-link">Filtrer</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card h-100 p-4 rounded-4 shadow-sm">
+          <div class="icon-wrap text-primary mb-3"><i class="bi bi-plus-circle fs-1"></i></div>
+          <h5>Ajout rapide</h5>
+          <p class="text-muted">Ajoutez une pharmacie ou un cabinet en 2 minutes, avec position sur la carte.</p>
+          <a routerLink="/create-pharmacy" class="stretched-link">Ajouter</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+
+<!-- Stats -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row text-center g-4">
+      <div class="col-md-3">
+        <div class="stat-card p-4 rounded-4 bg-white shadow-sm">
+          <div class="h2 mb-0">
+            <ng-container *ngIf="!loading; else sk1">+{{ stats?.pharmacies || 0 }}</ng-container>
+          </div>
+          <small class="text-muted">Pharmacies</small>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card p-4 rounded-4 bg-white shadow-sm">
+          <div class="h2 mb-0">
+            <ng-container *ngIf="!loading; else sk2">+{{ stats?.medicalOffices || 0 }}</ng-container>
+          </div>
+          <small class="text-muted">Cabinets</small>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card p-4 rounded-4 bg-white shadow-sm">
+          <div class="h2 mb-0">24/24</div>
+          <small class="text-muted">Garde</small>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card p-4 rounded-4 bg-white shadow-sm">
+          <div class="h2 mb-0">100%</div>
+          <small class="text-muted">Gratuit</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #sk1><span class="placeholder col-6"></span></ng-template>
+<ng-template #sk2><span class="placeholder col-6"></span></ng-template>

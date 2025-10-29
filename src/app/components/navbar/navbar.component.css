@@ -1,17 +1,46 @@
 .navbar {
     margin-bottom: 20px;
   }
-  
+
   .navbar-brand {
     font-weight: bold;
   }
-  
+
   .form-inline {
     display: flex;
     align-items: center;
   }
-  
+
   .btn-outline-danger {
     margin-left: 10px;
   }
-  
+/* Taille logo & spacing */
+.brand-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Nav active + hover plus lisible */
+.navbar .nav-link {
+  font-weight: 500;
+}
+.navbar .nav-link.active,
+.navbar .nav-link:focus,
+.navbar .nav-link:hover {
+  color: #0d6efd;
+}
+
+/* Champ de recherche compact et propre */
+.search-input {
+  min-width: 240px;
+  border-radius: 10px;
+}
+
+/* Petites retouches dropdown */
+.dropdown-menu {
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}

@@ -1,45 +1,95 @@
+<div class="container py-4">
+  <h2 class="mb-3">List of Pharmacies</h2>
 
+  <!-- Toolbar -->
+  <div class="row g-2 align-items-end mb-3">
+    <div class="col-12 col-lg-3">
+      <label class="form-label">Critère</label>
+      <select class="form-select"
+              [(ngModel)]="selectedCriteria"
+              name="criteria"
+              (change)="onSearchChange()">
+        <option value="moughataa">Moughataa (Wilaya)</option>
+        <option value="commune">Commune</option>
+        <option value="open_time">Horaires d'ouverture</option>
+      </select>
+    </div>
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4">List of Pharmacies</h2>
-
-    <!-- Formulaire de recherche -->
-    <form class="mb-4">
+    <div class="col-12 col-lg-4">
+      <label class="form-label">Recherche</label>
       <div class="input-group">
-        <select class="form-control" [(ngModel)]="selectedCriteria" name="criteria" title="Sélectionnez un critère de recherche">
-          <option value="moughataa">Moughataa</option>
-          <option value="commune">Commune</option>
-          <option value="open_time">Horaires d'ouverture</option>
-          <!-- Options de critères de recherche -->
-        </select>
-        <input class="form-control" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchTerm" name="search" (input)="onSearchChange()">
-        <div class="input-group-append">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+        <input class="form-control"
+               type="search"
+               placeholder="Search"
+               [(ngModel)]="searchTerm"
+               name="search"
+               (input)="onSearchChange()">
+      </div>
+    </div>
+
+    <div class="col-6 col-lg-2">
+      <label class="form-label">Wilaya</label>
+      <select class="form-select" [(ngModel)]="filterWilaya" (change)="applyFilters()">
+        <option value="">Toutes</option>
+        <option *ngFor="let w of wilayas" [value]="w">{{ w }}</option>
+      </select>
+    </div>
+
+    <div class="col-6 col-lg-2">
+      <label class="form-label">Ouverture</label>
+      <select class="form-select" [(ngModel)]="filterOpen" (change)="applyFilters()">
+        <option value="">Toutes</option>
+        <option value="24/24">24/24</option>
+        <option value="16/24">16/24</option>
+        <option value="12/24">12/24</option>
+        <option value="10/24">10/24</option>
+        <option value="8/24">8/24</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Cards -->
+  <div class="row g-3">
+    <div class="col-md-6 col-lg-4" *ngFor="let pharmacy of filtered">
+      <div class="card pharmacy-card h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start mb-1">
+            <h5 class="card-title mb-0">{{ pharmacy.name }}</h5>
+            <span *ngIf="pharmacy.open_time === '24/24'" class="badge badge-soft-success">24/24</span>
+          </div>
+
+          <div class="small pharmacy-meta mb-2">
+            <i class="bi bi-geo-alt me-1"></i>
+            {{ pharmacy.commune || '—' }}, {{ pharmacy.moughataa || '—' }}
+          </div>
+
+          <div class="small text-truncate-2 mb-3">
+            {{ pharmacy.addressFormatted || pharmacy.addressRaw || 'Adresse non renseignée' }}
+          </div>
+
+          <div class="d-flex gap-2">
+            <button class="btn btn-icon" (click)="openOnMap(pharmacy)" title="Ouvrir dans la carte">
+              <i class="bi bi-map"></i>
+            </button>
+
+            <a [routerLink]="['/pharmacies', pharmacy.id]" class="btn btn-icon" title="Détails">
+              <i class="bi bi-eye"></i>
+            </a>
+
+            <button *ngIf="!isVisitor()" class="btn btn-icon text-danger ms-auto"
+                    (click)="deletePharmacy(pharmacy.id)" title="Supprimer">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
         </div>
       </div>
-    </form>
 
-    <!-- Liste des pharmacies -->
-    <table class="table table-bordered table-hover">
-      <thead class="bg-primary text-white">
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let pharmacy of pharmacies">
-          <td>{{ pharmacy.id }}</td>
-          <td>{{ pharmacy.name }}</td>
-          <td>
-            <a [routerLink]="['/pharmacies', pharmacy.id]" class="btn btn-primary me-2"><img src="assets/images/view.png" alt="view"></a>
-            <button (click)="deletePharmacy(pharmacy.id)" class="btn btn-danger" *ngIf="!isVisitor()">
-              <img src="assets/images/delete.png" alt="delete">
-            </button>
-            
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    </div>
+
+    <div *ngIf="filtered?.length === 0" class="text-center text-muted py-5">
+      Aucune pharmacie trouvée.
+    </div>
   </div>
+</div>
+

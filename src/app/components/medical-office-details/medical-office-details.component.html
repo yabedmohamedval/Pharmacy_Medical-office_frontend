@@ -1,3 +1,4 @@
+<!--
 <div class="container">
   <h2 class="mt-4 mb-3">Détails du Cabinet Médical</h2>
   <div *ngIf="medicalOffice" class="card">
@@ -9,6 +10,122 @@
       <p class="card-text">Commune: {{ medicalOffice.commune }}</p>
       <p class="card-text">Spécialité: {{ medicalOffice.speciality }}</p>
       <p class="card-text">open_time: {{ medicalOffice.open_time }}</p>
+    </div>
+  </div>
+</div>
+-->
+
+<div class="container py-4">
+  <h2 class="mb-3">List of Medical Offices</h2>
+
+  <!-- Toolbar -->
+  <div class="row g-2 align-items-end mb-3">
+    <div class="col-12 col-lg-3">
+      <label class="form-label">Critère</label>
+      <select class="form-select"
+              [(ngModel)]="selectedCriteria"
+              name="criteria"
+              (change)="onSearchChange()">
+        <option value="moughataa">Moughataa</option>
+        <option value="commune">Commune</option>
+        <option value="speciality">Spécialité</option>
+        <option value="open_time">Horaires d'ouverture</option>
+      </select>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <label class="form-label">Recherche</label>
+      <div class="input-group">
+        <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+        <input class="form-control"
+               type="search"
+               placeholder="Search"
+               [(ngModel)]="searchTerm"
+               name="search"
+               (input)="onSearchChange()">
+      </div>
+    </div>
+
+    <div class="col-6 col-lg-2">
+      <label class="form-label">Moughataa</label>
+      <select class="form-select" [(ngModel)]="filterMoughataa" (change)="onMoughataaChange()">
+        <option value="">Tous</option>
+        <option *ngFor="let m of moughataas" [value]="m">{{ m }}</option>
+      </select>
+    </div>
+
+    <div class="col-6 col-lg-2">
+      <label class="form-label">Commune</label>
+      <select class="form-select" [(ngModel)]="filterCommune" (change)="applyFilters()">
+        <option value="">Toutes</option>
+        <option *ngFor="let c of communes" [value]="c">{{ c }}</option>
+      </select>
+    </div>
+
+    <div class="col-6 col-lg-2">
+      <label class="form-label">Ouverture</label>
+      <select class="form-select" [(ngModel)]="filterOpen" (change)="applyFilters()">
+        <option value="">Toutes</option>
+        <option value="24/24">24/24</option>
+        <option value="16/24">16/24</option>
+        <option value="12/24">12/24</option>
+        <option value="10/24">10/24</option>
+        <option value="8/24">8/24</option>
+      </select>
+    </div>
+
+    <div class="col-6 col-lg-3">
+      <label class="form-label">Spécialité</label>
+      <select class="form-select" [(ngModel)]="filterSpeciality" (change)="applyFilters()">
+        <option value="">Toutes</option>
+        <option *ngFor="let s of specialities" [value]="s">{{ s }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Cards -->
+  <div class="row g-3">
+    <div class="col-md-6 col-lg-4" *ngFor="let o of filtered">
+      <div class="card pharmacy-card h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start mb-1">
+            <h5 class="card-title mb-0">{{ o.name }}</h5>
+
+            <div class="d-flex align-items-center gap-2">
+              <span *ngIf="o.speciality" class="badge bg-light text-dark border">{{ o.speciality }}</span>
+              <span *ngIf="o.open_time === '24/24'" class="badge badge-soft-success">24/24</span>
+            </div>
+          </div>
+
+          <div class="small pharmacy-meta mb-2">
+            <i class="bi bi-geo-alt me-1"></i>
+            {{ o.commune || '—' }}, {{ o.moughataa || '—' }}
+          </div>
+
+          <div class="small text-truncate-2 mb-3">
+            {{ o.addressFormatted || o.addressRaw || 'Adresse non renseignée' }}
+          </div>
+
+          <div class="d-flex gap-2">
+            <button class="btn btn-icon" (click)="openOnMap(o)" title="Ouvrir dans la carte">
+              <i class="bi bi-map"></i>
+            </button>
+
+            <a [routerLink]="['/medical-offices', o.id]" class="btn btn-icon" title="Détails">
+              <i class="bi bi-eye"></i>
+            </a>
+
+            <button *ngIf="!isVisitor()" class="btn btn-icon text-danger ms-auto"
+                    (click)="deleteOffice(o.id)" title="Supprimer">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="filtered?.length === 0" class="text-center text-muted py-5">
+      Aucun cabinet trouvé.
     </div>
   </div>
 </div>

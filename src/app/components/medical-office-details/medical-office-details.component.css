@@ -1,0 +1,53 @@
+/* Carte plus “pro” */
+.pharmacy-card {
+  border: 1px solid #eef1f4;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(16,24,40,.06);
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.pharmacy-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(16,24,40,.12);
+  border-color: #e2e8f0;
+}
+
+/* Titre + badge */
+.pharmacy-card .card-title {
+  font-weight: 700;
+  letter-spacing: .1px;
+}
+
+/* Sous-texte (adresse/lieu) */
+.pharmacy-meta {
+  color: #667085;
+}
+
+/* Texte de l’adresse sur 2 lignes max */
+.text-truncate-2 {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Badge “subtle” 24/24 */
+.badge-soft-success {
+  color: #027a48;
+  background: #ecfdf3;
+  border: 1px solid #a6f0c6;
+  font-weight: 600;
+}
+
+/* Boutons icônes ronds, discrets */
+.btn-icon {
+  width: 36px; height: 36px; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #e4e7ec;
+  background: #fff;
+}
+.btn-icon:hover { background: #f8fafc; border-color: #d0d5dd; }
+.btn-icon.text-danger:hover { background: #fff1f3; border-color: #fecdd3; }
+
+/* Espace entre cartes */
+.row.g-3 > [class*='col-'] { display: flex; }
+.pharmacy-card.h-100 { width: 100%; }

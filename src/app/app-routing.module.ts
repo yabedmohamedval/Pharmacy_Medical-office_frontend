@@ -16,14 +16,14 @@ import { CreatePharmacyComponent } from './components/create-pharmacy/create-pha
 const routes: Routes = [
   {path:'',redirectTo:'/login' , pathMatch: 'full' },
   {path:'login',component:LoginComponent},
-  {path:"reset-password",component:ResetPasswordComponent, canActivate: [AuthGuard], data: { allowedRoles: ['ADMIN','VISITER'] }},
-  { path: 'home', component: HomeComponent , canActivate: [AuthGuard], data: { allowedRoles: ['ADMIN','VISITER'] }},
+  {path:"reset-password",component:ResetPasswordComponent, canActivate: [AuthGuard], data: { allowedRoles: ['ADMIN','VISITOR'] }},
+  { path: 'home', component: HomeComponent , canActivate: [AuthGuard], data: { allowedRoles: ['ADMIN','VISITOR'] }},
   { path: 'create-medical-office', component: CreateMedicalOfficeComponent , canActivate: [AuthGuard], data: { allowedRoles: ['ADMIN'] }},
-  { path: 'medical-offices', component: MedicalOfficeListComponent , canActivate: [AuthGuard], data: { allowedRoles: ['ADMIN','VISITER'] }},
-  { path: 'medical-offices/:id', component: MedicalOfficeDetailsComponent , canActivate: [AuthGuard], data: { allowedRoles: ['ADMIN','VISITER'] }},
+  { path: 'medical-offices', component: MedicalOfficeListComponent , canActivate: [AuthGuard], data: { allowedRoles: ['ADMIN','VISITOR'] }},
+  { path: 'medical-offices/:id', component: MedicalOfficeDetailsComponent , canActivate: [AuthGuard], data: { allowedRoles: ['ADMIN','VISITOR'] }},
 
-  { path: 'pharmacies', component: PharmacyListComponent , canActivate: [AuthGuard], data: { allowedRoles: ['ADMIN','VISITER'] }},
-  { path: 'pharmacies/:id', component: PharmacyDetailsComponent , canActivate: [AuthGuard], data: { allowedRoles: ['ADMIN','VISITER'] }},
+  { path: 'pharmacies', component: PharmacyListComponent , canActivate: [AuthGuard], data: { allowedRoles: ['ADMIN','VISITOR'] }},
+  { path: 'pharmacies/:id', component: PharmacyDetailsComponent , canActivate: [AuthGuard], data: { allowedRoles: ['ADMIN','VISITOR'] }},
   { path: 'create-pharmacy', component: CreatePharmacyComponent , canActivate: [AuthGuard], data: { allowedRoles: ['ADMIN'] }},
 
 ];

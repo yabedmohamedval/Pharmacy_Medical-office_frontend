@@ -18,7 +18,7 @@ export class MedicalOfficeListComponent implements OnInit {
     this.loadMedicalOffices();
   }
   isVisitor(){
-    return localStorage["roles"]=="VISITER";
+    return localStorage["roles"]=="VISITOR";
   }
   loadMedicalOffices() {
     this.medicalOfficeService.getMedicalOffices().subscribe((data: MedicalOffice[]) => {

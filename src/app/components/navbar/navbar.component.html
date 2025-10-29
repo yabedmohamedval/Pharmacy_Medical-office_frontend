@@ -1,3 +1,4 @@
+<!--
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">
     <img src="assets/images/pharmacy_logo.webp" alt="logo" style="width: 40px; height: 40px;">
@@ -28,5 +29,86 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
     <button class="btn btn-outline-danger ml-2" (click)="logout()">Logout</button>
+  </div>
+</nav>
+-->
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top shadow-sm">
+  <div class="container">
+    <!-- Brand -->
+    <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/home">
+      <img src="assets/images/pharmacy_logo.webp" alt="logo" class="brand-logo">
+      <span class="fw-semibold">HealthMap</span>
+    </a>
+
+    <!-- Toggler (Bootstrap 5: data-bs-*) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Nav content -->
+    <div class="collapse navbar-collapse" id="mainNav">
+      <!-- Left -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link">
+            Accueil
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a routerLink="/pharmacies" routerLinkActive="active" class="nav-link">
+            Pharmacies
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a routerLink="/medical-offices" routerLinkActive="active" class="nav-link">
+            Cabinets
+          </a>
+        </li>
+
+        <!-- Dropdown Ajouter (caché pour les visiteurs) -->
+        <li class="nav-item dropdown" *ngIf="!isVisitor()">
+          <a class="nav-link dropdown-toggle" href="#" id="addDropdown" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">
+            Ajouter
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="addDropdown">
+            <li>
+              <a class="dropdown-item" routerLink="/create-pharmacy">
+                Nouvelle pharmacie
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/create-medical-office">
+                Nouveau cabinet
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Search -->
+      <form class="d-flex me-2" (ngSubmit)="onSubmit()" role="search">
+        <input class="form-control me-2 search-input" type="search" placeholder="Rechercher..."
+               aria-label="Search" [(ngModel)]="searchTerm" name="search">
+        <button class="btn btn-success btn-sm" type="submit">Search</button>
+      </form>
+
+      <!-- User menu -->
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button"
+                id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-person-circle me-1"></i>{{ username || 'Compte' }}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+          <li><span class="dropdown-item-text small text-muted">Rôle : {{ role || '—' }}</span></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" routerLink="/home">Tableau de bord</a></li>
+          <li><button class="dropdown-item text-danger" (click)="logout()">Déconnexion</button></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </nav>
